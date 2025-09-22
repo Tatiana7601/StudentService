@@ -44,7 +44,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentDto removeStudent(int id) {
-        Student student = studentRepository.findById(id).orElseThrow(StudentNotFoundException::new);
+        Student student = studentRepository.findById(id).
+                orElseThrow(StudentNotFoundException::new);
         studentRepository.deleteById(id);
         return new StudentDto(
                 student.getId(),
@@ -71,6 +72,10 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public boolean addScore(int id, ScoreDto scoreDto) {
-        return false;
+        Student student = studentRepository.findById(id).
+                orElseThrow(StudentNotFoundException::new);
+        student.getScores().put(scoreDto.getExam(),  scoreDto.getScore());
+        studentRepository.save(student);
+        return true;
     }
 }
