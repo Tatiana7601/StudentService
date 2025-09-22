@@ -53,10 +53,10 @@ public class StudentController {
     public Integer getStudentsNamesQuantity(@RequestBody List<FullNameStudentDto> names) {
         return studentService.getStudentsNamesQuantity(names);
     }
-    /*
+
     @GetMapping("/students/exam/{exam}/minscore/{minScore}")
     public List<StudentDto> getStudentsByExamMinScore(@PathVariable String exam, @PathVariable Integer minScore) {
         return studentService.getStudentsByExamMinScore(exam, minScore);
     }
-    */
+
 }

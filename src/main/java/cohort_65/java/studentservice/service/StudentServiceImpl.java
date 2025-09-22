@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -98,5 +97,21 @@ public class StudentServiceImpl implements StudentService {
                         .anyMatch(name -> student.getFirstName().equals(name.getFirstName())
                                 && student.getLastName().equals(name.getLastName())))
                 .count();
+    }
+
+    @Override
+    public List<StudentDto> getStudentsByExamMinScore(String exam, Integer minScore) {
+        return studentRepository.findAll().stream()
+                .filter(student -> {
+                    Integer score = student.getScores().get(exam);
+                    return score != null && score >= minScore;
+                })
+                .map(student -> new StudentDto(
+                        student.getId(),
+                        student.getFirstName(),
+                        student.getLastName(),
+                        student.getScores()
+                ))
+                .collect(Collectors.toList());
     }
 }

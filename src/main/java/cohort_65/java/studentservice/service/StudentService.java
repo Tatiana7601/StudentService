@@ -24,4 +24,6 @@ public interface StudentService {
 
     Integer getStudentsNamesQuantity(List<FullNameStudentDto> names);
 
+    List<StudentDto> getStudentsByExamMinScore(String exam, Integer minScore);
+
 }
