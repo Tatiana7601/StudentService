@@ -36,14 +36,15 @@ public class StudentController {
                                     @PathVariable int id) {
         return studentService.updateStudent(updateStudent, id);
     }
-/* TODO advanced
-    added for model Student field:
-    Map<String, Integer> scores = new HashMap<>();
 
+    /*
     @PutMapping("/score/student/{id}")
     public Boolean addScore(@PathVariable int id, @RequestBody ScoreDto scoreDto) {
         return studentService.addScore(id, scoreDto);
     }
+     TODO advanced
+    added for model Student field:
+    Map<String, Integer> scores = new HashMap<>();
 
     @GetMapping("/students/name/{name}")
     public List<StudentDto> findStudentsByName(@PathVariable String name) {

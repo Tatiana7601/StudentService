@@ -39,7 +39,12 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentDto updateStudent(UpdateStudentDto updateStudent, int id) {
-        //TODO: Implement updateStudent method
-        return null;
+        Student student = studentRepository.findById(id)
+                .orElseThrow(StudentNotFoundException::new);
+        student.setName(updateStudent.getName());
+        studentRepository.save(student);
+
+
+        return new StudentDto(student.getId(), student.getName());
     }
 }
