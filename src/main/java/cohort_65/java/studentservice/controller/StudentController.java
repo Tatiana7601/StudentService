@@ -1,6 +1,7 @@
 package cohort_65.java.studentservice.controller;
 
 import cohort_65.java.studentservice.dto.NewStudentDto;
+import cohort_65.java.studentservice.dto.ScoreDto;
 import cohort_65.java.studentservice.dto.StudentDto;
 import cohort_65.java.studentservice.dto.UpdateStudentDto;
 import cohort_65.java.studentservice.service.StudentService;
@@ -37,11 +38,12 @@ public class StudentController {
         return studentService.updateStudent(updateStudent, id);
     }
 
-    /*
+
     @PutMapping("/score/student/{id}")
     public Boolean addScore(@PathVariable int id, @RequestBody ScoreDto scoreDto) {
         return studentService.addScore(id, scoreDto);
     }
+    /*
      TODO advanced
     added for model Student field:
     Map<String, Integer> scores = new HashMap<>();
