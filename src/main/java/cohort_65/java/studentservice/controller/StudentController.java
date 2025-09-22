@@ -1,9 +1,6 @@
 package cohort_65.java.studentservice.controller;
 
-import cohort_65.java.studentservice.dto.NewStudentDto;
-import cohort_65.java.studentservice.dto.ScoreDto;
-import cohort_65.java.studentservice.dto.StudentDto;
-import cohort_65.java.studentservice.dto.UpdateStudentDto;
+import cohort_65.java.studentservice.dto.*;
 import cohort_65.java.studentservice.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -43,21 +40,20 @@ public class StudentController {
     public Boolean addScore(@PathVariable int id, @RequestBody ScoreDto scoreDto) {
         return studentService.addScore(id, scoreDto);
     }
-    /*
-     TODO advanced
-    added for model Student field:
-    Map<String, Integer> scores = new HashMap<>();
 
-    @GetMapping("/students/name/{name}")
-    public List<StudentDto> findStudentsByName(@PathVariable String name) {
-        return studentService.findStudentsByName(name);
+    //todo запит на цей метод дає помилку 400
+    @GetMapping("/students/fullname")
+    public List<StudentDto> findStudentsByName(@RequestParam  String firstName,
+                                               @RequestParam  String lastName) {
+        return studentService.findStudentsByName(firstName,lastName);
     }
+
 
     @PostMapping("/quantity/students")
-    public Integer getStudentsNamesQuantity(@RequestBody Set<String> names) {
+    public Integer getStudentsNamesQuantity(@RequestBody List<FullNameStudentDto> names) {
         return studentService.getStudentsNamesQuantity(names);
     }
-
+    /*
     @GetMapping("/students/exam/{exam}/minscore/{minScore}")
     public List<StudentDto> getStudentsByExamMinScore(@PathVariable String exam, @PathVariable Integer minScore) {
         return studentService.getStudentsByExamMinScore(exam, minScore);

@@ -1,11 +1,12 @@
 package cohort_65.java.studentservice.service;
 
-import cohort_65.java.studentservice.dto.NewStudentDto;
-import cohort_65.java.studentservice.dto.ScoreDto;
-import cohort_65.java.studentservice.dto.StudentDto;
-import cohort_65.java.studentservice.dto.UpdateStudentDto;
+import cohort_65.java.studentservice.dto.*;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+import java.util.Set;
 
 public interface StudentService {
 
@@ -17,5 +18,10 @@ public interface StudentService {
 
     StudentDto updateStudent(UpdateStudentDto updateStudent, int id);
 
-    boolean addScore(@PathVariable int id, @RequestBody ScoreDto scoreDto);
+    boolean addScore(int id, ScoreDto scoreDto);
+
+    List<StudentDto> findStudentsByName( String firstName, String LastName);
+
+    Integer getStudentsNamesQuantity(List<FullNameStudentDto> names);
+
 }

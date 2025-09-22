@@ -1,16 +1,16 @@
 package cohort_65.java.studentservice.service;
 
 import cohort_65.java.studentservice.dao.StudentRepository;
-import cohort_65.java.studentservice.dto.NewStudentDto;
-import cohort_65.java.studentservice.dto.ScoreDto;
-import cohort_65.java.studentservice.dto.StudentDto;
-import cohort_65.java.studentservice.dto.UpdateStudentDto;
+import cohort_65.java.studentservice.dto.*;
 import cohort_65.java.studentservice.dto.exception.StudentNotFoundException;
 import cohort_65.java.studentservice.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -77,5 +77,26 @@ public class StudentServiceImpl implements StudentService {
         student.getScores().put(scoreDto.getExam(),  scoreDto.getScore());
         studentRepository.save(student);
         return true;
+    }
+
+    @Override
+    public List<StudentDto> findStudentsByName(String firstName, String lastName) {
+        return studentRepository.findAll().stream()
+                .filter(s -> s.getFirstName().equals(firstName) && s.getLastName().equals(lastName))
+                .map(s -> new StudentDto(s.getId(), s.getFirstName(), s.getLastName(), s.getScores()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Integer getStudentsNamesQuantity(List<FullNameStudentDto> names) {
+        if (names == null || names.isEmpty()) {
+            return 0;
+        }
+
+        return (int) studentRepository.findAll().stream()
+                .filter(student -> names.stream()
+                        .anyMatch(name -> student.getFirstName().equals(name.getFirstName())
+                                && student.getLastName().equals(name.getLastName())))
+                .count();
     }
 }
