@@ -14,5 +14,5 @@ public class StudentDto {
     Integer id;
     String firstName;
     String lastName;
-    Map<String,Integer> scores = new HashMap<>();
+
 }

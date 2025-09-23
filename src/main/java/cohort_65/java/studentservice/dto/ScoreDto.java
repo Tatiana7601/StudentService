@@ -7,9 +7,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class ScoreDto {
-    String exam;
+    String examName;
     Integer score;
 }
