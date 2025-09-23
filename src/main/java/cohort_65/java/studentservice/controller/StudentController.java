@@ -41,16 +41,13 @@ public class StudentController {
         return studentService.addScore(id, scoreDto);
     }
 
-    //todo запит на цей метод дає помилку 400
-    @GetMapping("/students/fullname")
-    public List<StudentDto> findStudentsByName(@RequestParam  String firstName,
-                                               @RequestParam  String lastName) {
-        return studentService.findStudentsByName(firstName,lastName);
+    @GetMapping("/students/name/{name}")
+    public List<StudentDto> findStudentsByName(@PathVariable String name) {
+        return studentService.findStudentsByName(name);
     }
 
-
     @PostMapping("/quantity/students")
-    public Integer getStudentsNamesQuantity(@RequestBody List<FullNameStudentDto> names) {
+    public Integer getStudentsNamesQuantity(@RequestBody Set<String> names) {
         return studentService.getStudentsNamesQuantity(names);
     }
 
