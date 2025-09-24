@@ -15,8 +15,8 @@ public interface StudentRepository extends MongoRepository<Student,Integer> {
 
         List<Student> findByFirstNameIn (Collection<String> names);
 
-         @Query("{ 'scores': { $elemMatch: { 'examName': ?0, 'score': { $gte: ?1 } } } }")
-        List<Student> findByExamMinScore(String exam, Integer minScore);
+    @Query("{ 'scores.?0': { $gte: ?1 } }")
+    List<Student> findByExamMinScore(String exam, Integer minScore);
 }
 
 
